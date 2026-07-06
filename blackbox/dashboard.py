@@ -8,33 +8,29 @@ Run from the project root:
 from __future__ import annotations
 
 import json
+from pathlib import Path
 from typing import Any
 
 import streamlit as st
 
 try:
-    # Preferred when launched via `streamlit run run_dashboard.py`.
     from blackbox.agent_demo import build_demo_decisions
     from blackbox.recorder import BlackBox, BlackBoxError
 except ModuleNotFoundError:
-    # Fallback when Streamlit executes this file directly from blackbox/.
     from agent_demo import build_demo_decisions
     from recorder import BlackBox, BlackBoxError
 
-    # Add this right after the imports
-def load_css():
+
+def load_css() -> None:
+    """Load the dashboard stylesheet from the package directory."""
+    css_path = Path(__file__).with_name("style.css")
     try:
-        with open('style.css') as f:
-            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+        css = css_path.read_text(encoding="utf-8")
     except FileNotFoundError:
         st.warning("style.css not found. Using default theme.")
+        return
 
-# Call it in main() right after st.set_page_config
-def main():
-    st.set_page_config(...)
-    load_css()  # <-- Add this line
-    
-    # Rest of your code...
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 
 def _init_session_state() -> None:
@@ -152,6 +148,7 @@ def main() -> None:
         page_icon="🖤",
         layout="wide",
     )
+    load_css()
 
     _init_session_state()
     box: BlackBox = st.session_state.blackbox
@@ -159,7 +156,6 @@ def main() -> None:
     st.title("Black Box")
     st.caption("Tamper-evident flight recorder for AI agent decisions")
 
-    # Sidebar controls
     with st.sidebar:
         st.header("Controls")
         if st.button("Load demo data", use_container_width=True):

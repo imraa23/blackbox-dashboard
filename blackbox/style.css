@@ -1,0 +1,114 @@
+/* Dark theme */
+.stApp {
+    background-color: #0a0a0a;
+    color: #e0e0e0;
+}
+.main {
+    background-color: #0a0a0a;
+}
+
+/* Metric cards */
+.metric-card {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #2a2a2a;
+    text-align: center;
+}
+.metric-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #00d4ff;
+}
+.metric-label {
+    font-size: 14px;
+    color: #888888;
+    margin-top: 4px;
+}
+.metric-verified .metric-value {
+    color: #00ff88;
+}
+.metric-tampered .metric-value {
+    color: #ff4444;
+}
+
+/* Status badges */
+.badge-verified {
+    background-color: #00ff8822;
+    color: #00ff88;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #00ff8844;
+}
+.badge-tampered {
+    background-color: #ff444422;
+    color: #ff4444;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #ff444444;
+}
+
+/* Header */
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+.logo span {
+    color: #00d4ff;
+}
+.status-badge {
+    background-color: #00ff8822;
+    color: #00ff88;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #00ff8844;
+}
+
+/* Expander styling */
+.streamlit-expanderHeader {
+    background-color: #141414 !important;
+    border-radius: 8px !important;
+    border: 1px solid #222222 !important;
+}
+.streamlit-expanderContent {
+    background-color: #0f0f0f !important;
+    border-radius: 0 0 8px 8px !important;
+    border: 1px solid #222222 !important;
+    border-top: none !important;
+}
+
+/* Dataframe */
+.dataframe {
+    background-color: #111111 !important;
+}
+.dataframe th {
+    background-color: #1a1a1a !important;
+    color: #888888 !important;
+    font-weight: 600 !important;
+}
+.dataframe td {
+    color: #e0e0e0 !important;
+    border-bottom: 1px solid #1a1a1a !important;
+}
+
+/* Buttons */
+.stButton button {
+    background-color: #00d4ff !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    padding: 10px 24px !important;
+}
+.stButton button:hover {
+    background-color: #00bbee !important;
+    transform: scale(1.02);
+}

@@ -1,0 +1,4 @@
+# Black Box MVP dependencies
+# hashlib and json are part of the Python standard library — no install needed.
+
+streamlit>=1.32.0

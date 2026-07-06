@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black Box — Join the Waitlist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .container {
+            max-width: 640px;
+            width: 100%;
+            text-align: center;
+        }
+        .brand {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: -1.5px;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+        .brand .highlight {
+            font-weight: 300;
+            color: #ffffff;
+        }
+        .tagline {
+            font-size: 18px;
+            font-weight: 300;
+            color: #888888;
+            line-height: 1.6;
+            margin-bottom: 4px;
+        }
+        .tagline strong {
+            color: #ffffff;
+            font-weight: 500;
+        }
+        .sub-tagline {
+            font-size: 14px;
+            color: #555555;
+            margin-bottom: 32px;
+            font-weight: 300;
+        }
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            font-size: 13px;
+            color: #666666;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+        .mockup-box {
+            background: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            text-align: left;
+            transition: border-color 0.3s ease;
+        }
+        .mockup-box:hover {
+            border-color: #333333;
+        }
+        .mockup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+        .mockup-header .agent {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .mockup-header .status {
+            font-size: 12px;
+            color: #00ff88;
+            font-weight: 400;
+        }
+        .mockup-prompt {
+            font-size: 14px;
+            color: #888888;
+            font-weight: 300;
+            margin-bottom: 12px;
+        }
+        .mockup-prompt strong {
+            color: #ffffff;
+            font-weight: 400;
+        }
+        .mockup-chain {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: #444444;
+            font-weight: 300;
+        }
+        .mockup-chain .block {
+            background: #111111;
+            border: 1px solid #1a1a1a;
+            border-radius: 6px;
+            padding: 4px 10px;
+            color: #666666;
+            font-size: 11px;
+        }
+        .mockup-chain .arrow {
+            color: #333333;
+        }
+        .mockup-chain .verified {
+            color: #00ff88;
+        }
+        .form-wrapper {
+            background: #111111;
+            border-radius: 12px;
+            padding: 4px;
+            border: 1px solid #222222;
+            transition: border-color 0.3s ease;
+            margin-bottom: 16px;
+        }
+        .form-wrapper:focus-within {
+            border-color: #ffffff;
+        }
+        .form-inner {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 4px;
+        }
+        .form-inner input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 16px 20px;
+            font-size: 15px;
+            font-family: inherit;
+            color: #ffffff;
+            outline: none;
+            min-width: 0;
+            font-weight: 300;
+        }
+        .form-inner input::placeholder {
+            color: #444444;
+            font-weight: 300;
+        }
+        .form-inner button {
+            background: #ffffff;
+            border: none;
+            color: #000000;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 14px 28px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .form-inner button:hover {
+            background: #dddddd;
+        }
+        .form-inner button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .feedback-wrapper {
+            margin: 16px 0 24px;
+            text-align: left;
+        }
+        .feedback-wrapper label {
+            color: #666;
+            font-size: 13px;
+            font-weight: 300;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .feedback-wrapper textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #222;
+            background: #111;
+            color: #fff;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .feedback-wrapper textarea:focus {
+            border-color: #ffffff;
+        }
+        .feedback-wrapper textarea::placeholder {
+            color: #444;
+        }
+        .success {
+            display: none;
+            padding: 16px 0 32px;
+        }
+        .success.show {
+            display: block;
+        }
+        .success h2 {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #ffffff;
+        }
+        .success p {
+            color: #666666;
+            font-size: 15px;
+            font-weight: 300;
+        }
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin: 32px 0;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat .number {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+        .stat .label {
+            font-size: 11px;
+            color: #444444;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 300;
+        }
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: #222222;
+            margin: 0 auto 28px;
+        }
+        .trust {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: #444444;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+        }
+        .trust span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        @media (max-width: 520px) {
+            .brand { font-size: 34px; }
+            .tagline { font-size: 16px; }
+            .form-inner {
+                flex-direction: column;
+                padding: 4px;
+            }
+            .form-inner input {
+                width: 100%;
+                padding: 16px;
+                text-align: center;
+            }
+            .form-inner button {
+                width: 100%;
+                justify-content: center;
+                padding: 14px;
+            }
+            .stats { gap: 24px; }
+            .features { gap: 16px; }
+            .feature-item { font-size: 11px; }
+            .mockup-box { padding: 16px; }
+            .mockup-header .agent { font-size: 12px; }
+            .mockup-prompt { font-size: 12px; }
+            .trust { gap: 14px; font-size: 10px; }
+            .feedback-wrapper textarea { font-size: 13px; }
+        }
+        @media (max-width: 400px) {
+            .brand { font-size: 28px; }
+            .tagline { font-size: 14px; }
+            .stats { gap: 16px; }
+            .stat .number { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="brand">BLACK <span class="highlight">BOX</span></h1>
+    <p class="tagline">The cryptographic flight recorder for <strong>AI agents</strong>.</p>
+    <p class="sub-tagline">Every prompt. Every decision. Sealed forever.</p>
+
+    <div class="features">
+        <span class="feature-item">SHA-256 Sealed</span>
+        <span class="feature-item">Full Trace</span>
+        <span class="feature-item">Tamper-Evident</span>
+    </div>
+
+    <!-- Mockup Box -->
+    <div class="mockup-box">
+        <div class="mockup-header">
+            <span class="agent">research-agent</span>
+            <span class="status">✓ Verified</span>
+        </div>
+        <div class="mockup-prompt">
+            <strong>Prompt:</strong> Summarize the latest quarterly earnings report for ACME Corp.
+        </div>
+        <div class="mockup-chain">
+            <span class="block">Genesis</span>
+            <span class="arrow">→</span>
+            <span class="block">#1</span>
+            <span class="arrow">→</span>
+            <span class="block">#2</span>
+            <span class="arrow">→</span>
+            <span class="block">#3</span>
+            <span class="arrow">→</span>
+            <span class="block verified">✓ Verified</span>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <div class="form-wrapper" id="formWrapper">
+        <form class="form-inner" id="waitlistForm" onsubmit="return handleSubmit(event)">
+            <input
+                type="email"
+                id="emailInput"
+                placeholder="Enter your email for early access"
+                required
+                autocomplete="email"
+            />
+            <button type="submit" id="submitBtn">Join Waitlist</button>
+        </form>
+    </div>
+
+    <!-- Feedback Box -->
+    <div class="feedback-wrapper">
+        <label for="feedback">What features would you like to see in Black Box? (Optional)</label>
+        <textarea
+            id="feedback"
+            rows="2"
+            placeholder="E.g., Real-time alerts, Slack integration, API access, self-hosted option..."
+        ></textarea>
+    </div>
+
+    <!-- Success -->
+    <div class="success" id="successMessage">
+        <h2>You're on the list</h2>
+        <p>We'll email you when Black Box is ready.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat">
+            <div class="number" id="waitlistCount">0</div>
+            <div class="label">On Waitlist</div>
+        </div>
+        <div class="stat">
+            <div class="number">3</div>
+            <div class="label">Demo Decisions</div>
+        </div>
+        <div class="stat">
+            <div class="number">✓</div>
+            <div class="label">Chain Verified</div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="trust">
+        <span>Tamper-Evident</span>
+        <span>Court-Admissible</span>
+        <span>Open Source</span>
+    </div>
+</div>
+
+<script>
+    let count = parseInt(localStorage.getItem('blackboxWaitlistCount') || '0');
+
+    function updateCount() {
+        document.getElementById('waitlistCount').textContent = count;
+    }
+    updateCount();
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        const email = document.getElementById('emailInput').value.trim();
+        const feedback = document.getElementById('feedback').value.trim();
+
+        if (!email) {
+            alert('Please enter your email.');
+            return false;
+        }
+
+        const btn = document.getElementById('submitBtn');
+        btn.textContent = 'Submitting...';
+        btn.disabled = true;
+
+        // Store in localStorage
+        setTimeout(() => {
+            // Hide form, show success
+            document.getElementById('formWrapper').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+
+            // Increment counter
+            count += 1;
+            localStorage.setItem('blackboxWaitlistCount', String(count));
+            updateCount();
+
+            // Save email + feedback
+            const entries = JSON.parse(localStorage.getItem('blackboxEntries') || '[]');
+            entries.push({
+                email: email,
+                feedback: feedback || '(no feedback)',
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('blackboxEntries', JSON.stringify(entries));
+
+            btn.textContent = 'Join Waitlist';
+            btn.disabled = false;
+
+            console.log('Email:', email);
+            console.log('Feedback:', feedback || '(none)');
+            console.log('Total entries:', entries.length);
+        }, 800);
+
+        return false;
+    }
+
+    // Download CSV with email + feedback
+    function downloadData() {
+        const entries = JSON.parse(localStorage.getItem('blackboxEntries') || '[]');
+        if (entries.length === 0) {
+            alert('No entries captured yet.');
+            return;
+        }
+        let text = 'Email,Feedback,Date\n';
+        entries.forEach(e => {
+            text += `${e.email},"${e.feedback}",${e.date}\n`;
+        });
+        const blob = new Blob([text], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'blackbox_entries.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // Press Ctrl+Shift+D to download
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+            downloadData();
+        }
+    });
+
+    console.log('Press Ctrl+Shift+D to download all entries (email + feedback).');
+</script>
+
+</body>
+</html>
